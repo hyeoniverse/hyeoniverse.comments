@@ -1,67 +1,65 @@
 /* ============================================================================
- * giscus custom theme — 사이트 다크 (hex/rgba, 최대 호환)
- * 사용법: 배포 후 절대 URL(https://<도메인>/giscus-theme-dark.css)을
- *   admin → 설정 → 서비스 → 댓글 시스템 → "테마 (다크 모드)" 에 입력.
- *   ※ localhost·미배포 URL 은 giscus 가 못 읽음 → 배포 도메인이어야 함.
+ * giscus custom theme — 사이트 다크 (hex/rgba)
+ * 배포/공개 https URL 로 admin → 서비스 → 댓글 시스템 → "테마 (다크)" 에 입력.
  * ==========================================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 main {
-  /* 텍스트 (다크: 밝은 글자) */
+  /* 텍스트 */
   --color-fg-default: #eeede7;
   --color-fg-muted: #e0dfd8;
   --color-fg-subtle: #cac9c1;
   --color-fg-on-emphasis: #1b1a18;
 
-  /* 배경 (solid) */
+  /* 배경 */
   --color-canvas-default: #1b1a18;
   --color-canvas-overlay: #1b1a18;
   --color-canvas-inset: #242321;
   --color-canvas-subtle: #242321;
-  --color-input-bg: #242321;
+  --color-input-bg: #201f1c;
 
-  /* 테두리 (어두운 배경 위 밝은 alpha) */
-  --color-border-default: rgba(238, 237, 231, 0.18);
+  /* 테두리 — 중립(accent 아님) */
+  --color-border-default: rgba(238, 237, 231, 0.16);
   --color-border-muted: rgba(238, 237, 231, 0.10);
-  --color-neutral-muted: rgba(238, 237, 231, 0.09);
-  --color-neutral-subtle: rgba(238, 237, 231, 0.06);
+  --color-neutral-muted: rgba(238, 237, 231, 0.08);
+  --color-neutral-subtle: rgba(238, 237, 231, 0.05);
   --color-neutral-emphasis: #cac9c1;
   --color-neutral-emphasis-plus: #e0dfd8;
-  --color-primer-border-active: #ff4da6;
+  --color-primer-border-active: rgba(238, 237, 231, 0.5);
   --color-primer-fg-disabled: rgba(202, 201, 193, 0.5);
 
-  /* accent — 다크 브랜드 핑크 */
+  /* accent — 링크만 */
   --color-accent-fg: #ff4da6;
-  --color-accent-emphasis: #ff4da6;
-  --color-accent-muted: rgba(255, 77, 166, 0.4);
-  --color-accent-subtle: rgba(255, 77, 166, 0.15);
+  --color-accent-emphasis: #cac9c1;          /* 포커스/강조 = 중립 */
+  --color-accent-muted: rgba(238, 237, 231, 0.3);
+  --color-accent-subtle: rgba(238, 237, 231, 0.06);
 
   /* 상태색 */
   --color-success-fg: #53be70;
-  --color-danger-fg: #ff4da6;
+  --color-danger-fg: #e06a6a;
 
-  /* 버튼 (secondary) */
+  /* 버튼 (secondary) — outline */
   --color-btn-text: #eeede7;
-  --color-btn-bg: #242321;
-  --color-btn-border: rgba(238, 237, 231, 0.16);
-  --color-btn-hover-bg: #373633;
-  --color-btn-hover-border: rgba(238, 237, 231, 0.26);
-  --color-btn-active-bg: #373633;
-  --color-btn-active-border: rgba(238, 237, 231, 0.26);
+  --color-btn-bg: transparent;
+  --color-btn-border: rgba(238, 237, 231, 0.20);
+  --color-btn-hover-bg: rgba(238, 237, 231, 0.07);
+  --color-btn-hover-border: rgba(238, 237, 231, 0.30);
+  --color-btn-active-bg: rgba(238, 237, 231, 0.10);
+  --color-btn-active-border: rgba(238, 237, 231, 0.30);
 
-  /* 버튼 (primary = 댓글 등록) */
+  /* 버튼 (primary = 댓글 등록) — inverse 채움 (블로그 기존 디자인) */
   --color-btn-primary-text: #1b1a18;
-  --color-btn-primary-bg: #ff4da6;
-  --color-btn-primary-hover-bg: #e6398c;
+  --color-btn-primary-bg: #eeede7;
+  --color-btn-primary-hover-bg: #d8d6cd;
   --color-btn-primary-border: transparent;
   --color-btn-primary-hover-border: transparent;
-  --color-btn-primary-selected-bg: #e6398c;
-  --color-btn-primary-disabled-bg: rgba(255, 77, 166, 0.5);
+  --color-btn-primary-selected-bg: #d8d6cd;
+  --color-btn-primary-disabled-bg: rgba(238, 237, 231, 0.5);
 
-  /* 반응 hover */
-  --color-social-reaction-bg-hover: #373633;
-  --color-social-reaction-bg-reacted-hover: #373633;
+  /* 반응 — 중립 */
+  --color-social-reaction-bg-hover: rgba(238, 237, 231, 0.07);
+  --color-social-reaction-bg-reacted-hover: rgba(238, 237, 231, 0.10);
 
   color-scheme: dark;
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -74,13 +72,34 @@ main .gsc-comment-content {
 }
 
 /* ============================================================================
- * 블로그 디자인 언어 — 한 줄 요소는 capsule, 블록은 2xl(24px), 표는 좌우 트인 라인 테이블
+ * 블로그 디자인 언어
  * ==========================================================================*/
+
+/* 트인 댓글 — 카드 박스 제거, 루트 댓글은 hairline 구분선으로만 분리 */
+main .gsc-comment > div {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+main .gsc-comment-header {
+  background: transparent !important;
+}
+main .gsc-timeline > .gsc-comment {
+  padding: 22px 0;
+}
+main .gsc-timeline > .gsc-comment + .gsc-comment {
+  border-top: 1px solid var(--color-border-muted);
+}
+
+/* 스레드(답글) — 좌측 연결선 + 인덴트 */
+main .gsc-replies {
+  margin-left: 15px;
+  padding-left: 20px;
+  border-left: 2px solid var(--color-border-muted);
+}
 
 /* 한 줄 컨트롤 = capsule */
 main .btn,
-main .BtnGroup,
-main .BtnGroup-item,
 main .gsc-reactions-count,
 main .gsc-social-reaction-summary-item,
 main .gsc-direct-reaction-buttons button,
@@ -88,24 +107,44 @@ main .gsc-comment-author-association {
   border-radius: 9999px !important;
 }
 
+/* Write / Preview = 하나의 pill 세그먼트 (그룹만 pill, 안쪽 버튼은 각지게 이어붙음) */
+main .BtnGroup {
+  border-radius: 9999px !important;
+  overflow: hidden;
+  border: 1px solid var(--color-btn-border);
+}
+main .BtnGroup .btn,
+main .BtnGroup-item {
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+main .BtnGroup .btn + .btn,
+main .BtnGroup-item + .BtnGroup-item {
+  border-left: 1px solid var(--color-btn-border) !important;
+}
+
 /* 블록 = 2xl */
-main .gsc-comment > div,
 main .gsc-comment-box,
-main .gsc-comment-box-main,
-main .gsc-comment-box-textarea,
-main textarea.form-control,
 main .markdown-body pre,
 main .markdown-body img,
 main .gsc-reactions-popover {
   border-radius: 24px !important;
 }
+/* 입력 박스 연결 — 박스만 둥글게 클립, textarea 는 자체 radius 없음 */
+main .gsc-comment-box {
+  overflow: hidden !important;
+}
+main .gsc-comment-box-textarea,
+main textarea.form-control {
+  border-radius: 0 !important;
+}
 
-/* 인라인 코드 — 살짝 둥글게 */
+/* 인라인 코드 */
 main .markdown-body :not(pre) > code {
   border-radius: 6px;
 }
 
-/* 표 — 좌우 트인 라인 테이블 (외곽·세로선 없이 가로 규칙만, 줄무늬 제거) */
+/* 표 — 좌우 트인 라인 테이블 (외곽·세로선 없이 가로 규칙만) */
 main .markdown-body table {
   display: table;
   width: 100%;
