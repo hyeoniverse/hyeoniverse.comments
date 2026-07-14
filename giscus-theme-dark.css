@@ -73,7 +73,60 @@ main .gsc-comment-content {
   font-family: inherit;
 }
 
+/* ============================================================================
+ * 블로그 디자인 언어 — 한 줄 요소는 capsule, 블록은 2xl(24px), 표는 좌우 트인 라인 테이블
+ * ==========================================================================*/
+
+/* 한 줄 컨트롤 = capsule */
+main .btn,
+main .BtnGroup,
+main .BtnGroup-item,
+main .gsc-reactions-count,
+main .gsc-social-reaction-summary-item,
+main .gsc-direct-reaction-buttons button,
+main .gsc-comment-author-association {
+  border-radius: 9999px !important;
+}
+
+/* 블록 = 2xl */
 main .gsc-comment > div,
-main .gsc-comment-box {
-  border-radius: 12px;
+main .gsc-comment-box,
+main .gsc-comment-box-main,
+main .gsc-comment-box-textarea,
+main textarea.form-control,
+main .markdown-body pre,
+main .markdown-body img,
+main .gsc-reactions-popover {
+  border-radius: 24px !important;
+}
+
+/* 인라인 코드 — 살짝 둥글게 */
+main .markdown-body :not(pre) > code {
+  border-radius: 6px;
+}
+
+/* 표 — 좌우 트인 라인 테이블 (외곽·세로선 없이 가로 규칙만, 줄무늬 제거) */
+main .markdown-body table {
+  display: table;
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+}
+main .markdown-body table tr {
+  background: transparent !important;
+  border-top: 0;
+}
+main .markdown-body table th,
+main .markdown-body table td {
+  border: 0;
+  border-bottom: 1px solid var(--color-border-muted);
+  padding: 8px 14px;
+  text-align: left;
+}
+main .markdown-body table th {
+  border-bottom: 2px solid var(--color-border-default);
+  font-weight: 600;
+}
+main .markdown-body table tr:last-child td {
+  border-bottom: 0;
 }
