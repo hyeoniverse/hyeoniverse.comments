@@ -149,19 +149,28 @@ main .gsc-comment-box {
 }
 main .gsc-comment-box-textarea,
 main textarea.form-control {
-  border-radius: 12px !important;
+  border-radius: 24px !important;             /* 2xl */
   background: transparent !important;
   border: 1px solid transparent !important;   /* 기본 투명 → 포커스시만 accent (레이아웃 시프트 없음) */
 }
 main .gsc-comment-box-bottom {
   border-radius: 0 !important;
   border-top: 1px solid var(--color-border-muted) !important;   /* footer 구분선 */
+  padding-top: 12px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 /* textarea 아래 extras(마크다운 링크 영역) — 배경/보더/radius 제거 */
 main .gsc-comment-box-textarea-extras {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
+}
+/* Preview 탭 렌더 영역(.gsc-comment-box-preview) — 아래 border 제거 + 상하좌우 패딩 균일.
+   14px = textarea 좌우 패딩과 동일 → Write↔Preview 전환 시 글 시작 위치 안 틀어짐 */
+main .gsc-comment-box-preview {
+  border-bottom: 0 !important;
+  padding: 14px !important;
 }
 /* 포커스 = textarea(.gsc-comment-box-textarea) 에만 light accent 보더 */
 main .gsc-comment-box-textarea:focus,
@@ -359,3 +368,25 @@ main .markdown-body :not(pre) > code {
 /* 표 — 좌우 트인 라인 테이블 (외곽·세로선 없이 가로 규칙만) */
 main .markdown-body table {
   display: table;
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+}
+main .markdown-body table tr {
+  background: transparent !important;
+  border-top: 0;
+}
+main .markdown-body table th,
+main .markdown-body table td {
+  border: 0;
+  border-bottom: 1px solid var(--color-border-muted);
+  padding: 8px 14px;
+  text-align: left;
+}
+main .markdown-body table th {
+  border-bottom: 2px solid var(--color-border-default);
+  font-weight: 600;
+}
+main .markdown-body table tr:last-child td {
+  border-bottom: 0;
+}
