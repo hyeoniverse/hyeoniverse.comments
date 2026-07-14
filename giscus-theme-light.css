@@ -156,6 +156,12 @@ main textarea.form-control {
 main .gsc-comment-box-bottom {
   border-radius: 0 !important;
 }
+/* textarea 아래 extras(마크다운 링크 영역) — 배경/보더/radius 제거 */
+main .gsc-comment-box-textarea-extras {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
 /* 포커스 = textarea(.gsc-comment-box-textarea) 에만 light accent 보더. 박스/write 영역 전체 아님 */
 main .gsc-comment-box-textarea:focus,
 main textarea.form-control:focus {
@@ -164,13 +170,22 @@ main textarea.form-control:focus {
   outline: none !important;
 }
 
-/* Write / Preview 탭 = pill 세그먼트 (.gsc-comment-box-tabs) — 박스 안쪽 여백 두고 배치 */
+/* 탭 바(.gsc-comment-box-tabs) — 전체 폭 + 보더/배경 제거. pill 은 안쪽 래퍼가 담당 */
 main .gsc-comment-box-tabs {
-  display: inline-flex !important;
-  width: max-content;
-  margin: 12px 14px 2px !important;
+  display: flex !important;
+  width: 100% !important;
+  margin: 0 !important;
   padding: 0 !important;
   background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+/* Write/Preview 를 감싸는 래퍼(mx-2 mb-[-1px] mt-2) = pill 세그먼트.
+   여백은 aa 툴바와 상하좌우 8px 로 통일 */
+main .gsc-comment-box-tabs > div {
+  display: inline-flex;
+  width: max-content;
+  margin: 8px !important;
   border: 1px solid var(--color-btn-border) !important;
   border-radius: 9999px !important;
   overflow: hidden;
@@ -194,7 +209,7 @@ main .gsc-comment-box-tabs button.color-bg-canvas {
 /* aa 버튼(.gsc-comment-box-md-toolbar) = giscus 의 fixed-width(고정폭 글꼴) 토글 하나.
    역할이 안 보이니 CSS 툴팁을 붙임 — 테마 CSS 는 iframe 내부에서 실행되므로 ::after 로 가능(JS 불필요) */
 main .gsc-comment-box-md-toolbar {
-  margin: 0 14px 6px !important;
+  margin: 8px !important;               /* 탭 pill 래퍼와 상하좌우 여백 통일 */
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
@@ -258,14 +273,17 @@ main .gsc-timeline {
   border-top: 1px solid var(--color-border-muted);
   border-bottom: 1px solid var(--color-border-muted);
 }
-/* 답글 작성 영역(.gsc-comment-box-is-reply) — open: bg/radius 없이 아래에만 border */
+/* 답글 작성 영역(.gsc-comment-box-is-reply) — open: bg/radius 없이 아래 border + 왼쪽 스레드 줄.
+   줄 위치를 .gsc-reply 와 같은 x축(8px)에 맞춤 → 스레드 줄이 답글~답글작성까지 이어짐 */
 main .gsc-comment-box-is-reply,
 main .gsc-replies .gsc-comment-box {
   background: transparent !important;
   border: 0 !important;
   border-bottom: 1px solid var(--color-border-muted) !important;
+  border-left: 2px solid var(--color-border-muted) !important;
   border-radius: 0 !important;
   overflow: visible !important;
+  padding-left: 20px !important;
 }
 main .gsc-comment-box-is-reply .gsc-comment-box-textarea,
 main .gsc-comment-box-is-reply .gsc-comment-box-bottom,
@@ -273,17 +291,19 @@ main .gsc-replies .gsc-comment-box-textarea,
 main .gsc-replies .gsc-comment-box-bottom {
   border-radius: 0 !important;
 }
-/* 답글 박스 래퍼(.gsc-reply-box, color-bg-tertiary) — 배경 제거 + 왼쪽 indent */
+/* 답글 박스 래퍼(.gsc-reply-box, color-bg-tertiary) — 배경 제거 + 왼쪽 indent.
+   8px = .gsc-reply 의 스레드 줄과 같은 x축 (안쪽 박스의 줄이 여기서 시작하도록) */
 main .gsc-reply-box {
   background: transparent !important;
-  padding-left: 20px !important;
+  padding-left: 8px !important;
 }
-/* 답글 내부 박스(color-box-border-info) — info 박스 제거하고 왼쪽 스레드 줄로 */
+/* 답글 내부 박스(color-box-border-info) — info 박스 제거. 왼쪽 스레드 줄만 남기고 위/아래/오른쪽 border 없음 */
 main .color-box-border-info.w-full.rounded-md {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
   border-left: 2px solid var(--color-border-muted) !important;
+  border-bottom: 0 !important;
   padding-left: 16px !important;
 }
 
