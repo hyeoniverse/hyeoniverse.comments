@@ -130,13 +130,78 @@ main .markdown-body img,
 main .gsc-reactions-popover {
   border-radius: 24px !important;
 }
-/* 입력 박스 연결 — 박스만 둥글게 클립, textarea 는 자체 radius 없음 */
+/* 입력 박스 — textarea 상단 2xl, footer(마크다운 버튼) 하단 2xl */
 main .gsc-comment-box {
   overflow: hidden !important;
 }
 main .gsc-comment-box-textarea,
 main textarea.form-control {
+  border-radius: 24px 24px 0 0 !important;
+}
+main .gsc-comment-box-bottom {
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+/* 입력창 포커스 — 옅은 accent, 얇게 (두꺼운 ring 제거) */
+main .gsc-comment-box-textarea:focus,
+main textarea.form-control:focus,
+main textarea:focus {
+  border-color: rgba(212, 0, 99, 0.4) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 댓글 등록(primary) disabled — 칙칙한 회색 대신 dimmed inverse + 밝은 글자 */
+main .btn-primary:disabled,
+main .btn-primary[disabled],
+main .btn-primary.disabled {
+  background: rgba(36, 35, 33, 0.42) !important;
+  color: rgba(248, 246, 240, 0.85) !important;
+  border-color: transparent !important;
+  opacity: 1 !important;
+}
+
+/* 보기 영역(댓글 리스트) — 좌우 트인: radius 없이 위아래 끝에만 border */
+main .gsc-timeline {
+  border-top: 1px solid var(--color-border-muted);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+/* 답글 작성 영역도 동일 open — radius 없이 위아래 border */
+main .gsc-replies .gsc-comment-box {
   border-radius: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 1px solid var(--color-border-muted) !important;
+  border-bottom: 1px solid var(--color-border-muted) !important;
+  overflow: visible !important;
+}
+main .gsc-replies .gsc-comment-box-textarea,
+main .gsc-replies textarea.form-control {
+  border-radius: 0 !important;
+}
+
+/* 반응 고르기 picker 의 이모지 버튼 = 원형 */
+main .gsc-emoji-button,
+main .gsc-reactions-popover button,
+main .gsc-direct-reaction-buttons button {
+  border-radius: 9999px !important;
+}
+
+/* 댓글 불러오는 중 — 상단 여백 */
+main .gsc-loading,
+main .gsc-timeline-loading {
+  margin-top: 48px;
+}
+
+/* 정렬(오래된순/새로운순) 선택된 버튼 — inverse 채움 (라이트=검정+흰글자, 다크는 자동 반전) */
+main .gsc-header [aria-selected="true"],
+main .gsc-header .btn.selected,
+main .gsc-header .BtnGroup-item.selected,
+main .gsc-comments-header [aria-selected="true"],
+main .gsc-comments-tabs [aria-selected="true"] {
+  background: var(--color-btn-primary-bg) !important;
+  color: var(--color-btn-primary-text) !important;
+  border-color: transparent !important;
 }
 
 /* 인라인 코드 */
