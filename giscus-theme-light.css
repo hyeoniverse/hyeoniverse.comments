@@ -155,6 +155,7 @@ main textarea.form-control {
 }
 main .gsc-comment-box-bottom {
   border-radius: 0 !important;
+  border-top: 1px solid var(--color-border-muted) !important;   /* footer 구분선 */
 }
 /* textarea 아래 extras(마크다운 링크 영역) — 배경/보더/radius 제거 */
 main .gsc-comment-box-textarea-extras {
@@ -162,10 +163,18 @@ main .gsc-comment-box-textarea-extras {
   border: 0 !important;
   border-radius: 0 !important;
 }
-/* 포커스 = textarea(.gsc-comment-box-textarea) 에만 light accent 보더. 박스/write 영역 전체 아님 */
+/* 포커스 = textarea(.gsc-comment-box-textarea) 에만 light accent 보더 */
 main .gsc-comment-box-textarea:focus,
 main textarea.form-control:focus {
   border-color: var(--color-accent-light) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+/* write 래퍼(.gsc-comment-box-write) — giscus 기본 포커스 보더/링 제거.
+   textarea 에 커서 줄 때 여기까지 accent 가 번지는 걸 막음 */
+main .gsc-comment-box-write,
+main .gsc-comment-box-write:focus-within {
+  border-color: transparent !important;
   box-shadow: none !important;
   outline: none !important;
 }
@@ -268,22 +277,35 @@ main .btn-primary.disabled {
   opacity: 1 !important;
 }
 
+/* .link-secondary.text-sm — btn-primary 와 동일한 패딩/radius(capsule) + 보더만. 배경 없음(outline 룩) */
+main .link-secondary.text-sm {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 16px !important;
+  border: 1px solid var(--color-btn-border) !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  text-decoration: none !important;
+}
+main .link-secondary.text-sm:hover {
+  background: var(--color-btn-hover-bg) !important;
+  text-decoration: none !important;
+}
+
 /* 보기 영역(댓글 리스트) — 좌우 트인: radius 없이 위아래 끝에만 border */
 main .gsc-timeline {
   border-top: 1px solid var(--color-border-muted);
   border-bottom: 1px solid var(--color-border-muted);
 }
-/* 답글 작성 영역(.gsc-comment-box-is-reply) — open: bg/radius 없이 아래 border + 왼쪽 스레드 줄.
-   줄 위치를 .gsc-reply 와 같은 x축(8px)에 맞춤 → 스레드 줄이 답글~답글작성까지 이어짐 */
+/* 답글 작성 영역(.gsc-comment-box-is-reply) — 완전 open: 배경/보더/radius 전부 없음.
+   스레드 줄·indent 는 안쪽 color-box-border-info 박스가 담당 → 여기선 안 줌 (중복 방지) */
 main .gsc-comment-box-is-reply,
 main .gsc-replies .gsc-comment-box {
   background: transparent !important;
   border: 0 !important;
-  border-bottom: 1px solid var(--color-border-muted) !important;
-  border-left: 2px solid var(--color-border-muted) !important;
   border-radius: 0 !important;
   overflow: visible !important;
-  padding-left: 20px !important;
+  margin-top: 16px !important;          /* 위 답글과의 여백 */
 }
 main .gsc-comment-box-is-reply .gsc-comment-box-textarea,
 main .gsc-comment-box-is-reply .gsc-comment-box-bottom,
@@ -337,25 +359,3 @@ main .markdown-body :not(pre) > code {
 /* 표 — 좌우 트인 라인 테이블 (외곽·세로선 없이 가로 규칙만) */
 main .markdown-body table {
   display: table;
-  width: 100%;
-  border: 0;
-  border-collapse: collapse;
-}
-main .markdown-body table tr {
-  background: transparent !important;
-  border-top: 0;
-}
-main .markdown-body table th,
-main .markdown-body table td {
-  border: 0;
-  border-bottom: 1px solid var(--color-border-muted);
-  padding: 8px 14px;
-  text-align: left;
-}
-main .markdown-body table th {
-  border-bottom: 2px solid var(--color-border-default);
-  font-weight: 600;
-}
-main .markdown-body table tr:last-child td {
-  border-bottom: 0;
-}
