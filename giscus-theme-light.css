@@ -92,18 +92,21 @@ main .gsc-timeline > .gsc-comment + .gsc-comment {
   border-top: 1px solid var(--color-border-muted);
 }
 
-/* 스레드(답글) — giscus 기본 inset 박스 제거 + 스레드 전체를 감싸는 좌측 통짜 연결선 하나.
+/* 스레드(답글) — giscus 기본 inset 박스 제거. 좌측 스레드 줄은 각 .gsc-reply 에 부여(아래).
    giscus 자체 짧은 연결선(.gsc-tl-line)은 숨겨 이중선 방지 */
 main .gsc-replies {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
-  border-left: 2px solid var(--color-border-muted) !important;
-  margin-left: 13px;
-  padding-left: 22px;
 }
 main .gsc-tl-line {
   display: none !important;
+}
+/* 답글 각각(.gsc-reply) — 왼쪽 스레드 줄 + 들여쓰기 (세로로 이어져 연속 줄이 됨) */
+main .gsc-reply {
+  border-left: 2px solid var(--color-border-muted) !important;
+  margin-left: 8px;
+  padding-left: 20px !important;
 }
 
 /* 한 줄 컨트롤 = capsule */
@@ -146,17 +149,19 @@ main .gsc-comment-box {
 }
 main .gsc-comment-box-textarea,
 main textarea.form-control {
-  border-radius: 0 !important;
+  border-radius: 12px !important;
   background: transparent !important;
-  border: 0 !important;
+  border: 1px solid transparent !important;   /* 기본 투명 → 포커스시만 accent (레이아웃 시프트 없음) */
 }
 main .gsc-comment-box-bottom {
   border-radius: 0 !important;
 }
-/* 포커스 = 감싸는 박스 테두리가 light accent (내부 textarea 는 borderless) */
-main .gsc-comment-box:focus-within {
+/* 포커스 = textarea(.gsc-comment-box-textarea) 에만 light accent 보더. 박스/write 영역 전체 아님 */
+main .gsc-comment-box-textarea:focus,
+main textarea.form-control:focus {
   border-color: var(--color-accent-light) !important;
   box-shadow: none !important;
+  outline: none !important;
 }
 
 /* Write / Preview 탭 = pill 세그먼트 (.gsc-comment-box-tabs) — 박스 안쪽 여백 두고 배치 */
@@ -186,18 +191,16 @@ main .gsc-comment-box-tabs button.color-bg-canvas {
   color: var(--color-fg-default) !important;
 }
 
-/* aa 서식 툴바(.gsc-comment-box-md-toolbar) = 탭과 별개 sibling 행. 캡슐 버튼으로 정리 */
+/* aa 버튼(.gsc-comment-box-md-toolbar) = giscus 의 fixed-width(고정폭 글꼴) 토글 하나.
+   역할이 안 보이니 CSS 툴팁을 붙임 — 테마 CSS 는 iframe 내부에서 실행되므로 ::after 로 가능(JS 불필요) */
 main .gsc-comment-box-md-toolbar {
-  display: flex !important;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2px;
   margin: 0 14px 6px !important;
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
 }
 main .gsc-toolbar-item {
+  position: relative;
   border-radius: 9999px !important;
   border: 0 !important;
   background: transparent !important;
@@ -206,6 +209,27 @@ main .gsc-toolbar-item {
 main .gsc-toolbar-item:hover {
   background: var(--color-btn-hover-bg) !important;
   color: var(--color-fg-default) !important;
+}
+/* 커스텀 툴팁 — 박스 overflow:hidden 에 안 잘리게 버튼 아래로 표시 */
+main .gsc-toolbar-item::after {
+  content: "고정폭(모노스페이스) 글꼴";
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  background: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+  z-index: 5;
+}
+main .gsc-toolbar-item:hover::after {
+  opacity: 1;
 }
 
 /* 댓글 등록(primary) = 공통 .variant-primary: 채움 → hover 시 투명+본문색 반전 */
@@ -248,6 +272,19 @@ main .gsc-comment-box-is-reply .gsc-comment-box-bottom,
 main .gsc-replies .gsc-comment-box-textarea,
 main .gsc-replies .gsc-comment-box-bottom {
   border-radius: 0 !important;
+}
+/* 답글 박스 래퍼(.gsc-reply-box, color-bg-tertiary) — 배경 제거 + 왼쪽 indent */
+main .gsc-reply-box {
+  background: transparent !important;
+  padding-left: 20px !important;
+}
+/* 답글 내부 박스(color-box-border-info) — info 박스 제거하고 왼쪽 스레드 줄로 */
+main .color-box-border-info.w-full.rounded-md {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-left: 2px solid var(--color-border-muted) !important;
+  padding-left: 16px !important;
 }
 
 /* 반응 고르기 picker 의 이모지 버튼 = 원형 */
