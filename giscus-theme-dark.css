@@ -1,0 +1,79 @@
+/* ============================================================================
+ * giscus custom theme — 사이트 다크 (hex/rgba, 최대 호환)
+ * 사용법: 배포 후 절대 URL(https://<도메인>/giscus-theme-dark.css)을
+ *   admin → 설정 → 서비스 → 댓글 시스템 → "테마 (다크 모드)" 에 입력.
+ *   ※ localhost·미배포 URL 은 giscus 가 못 읽음 → 배포 도메인이어야 함.
+ * ==========================================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+main {
+  /* 텍스트 (다크: 밝은 글자) */
+  --color-fg-default: #eeede7;
+  --color-fg-muted: #e0dfd8;
+  --color-fg-subtle: #cac9c1;
+  --color-fg-on-emphasis: #1b1a18;
+
+  /* 배경 (solid) */
+  --color-canvas-default: #1b1a18;
+  --color-canvas-overlay: #1b1a18;
+  --color-canvas-inset: #242321;
+  --color-canvas-subtle: #242321;
+  --color-input-bg: #242321;
+
+  /* 테두리 (어두운 배경 위 밝은 alpha) */
+  --color-border-default: rgba(238, 237, 231, 0.18);
+  --color-border-muted: rgba(238, 237, 231, 0.10);
+  --color-neutral-muted: rgba(238, 237, 231, 0.09);
+  --color-neutral-subtle: rgba(238, 237, 231, 0.06);
+  --color-neutral-emphasis: #cac9c1;
+  --color-neutral-emphasis-plus: #e0dfd8;
+  --color-primer-border-active: #ff4da6;
+  --color-primer-fg-disabled: rgba(202, 201, 193, 0.5);
+
+  /* accent — 다크 브랜드 핑크 */
+  --color-accent-fg: #ff4da6;
+  --color-accent-emphasis: #ff4da6;
+  --color-accent-muted: rgba(255, 77, 166, 0.4);
+  --color-accent-subtle: rgba(255, 77, 166, 0.15);
+
+  /* 상태색 */
+  --color-success-fg: #53be70;
+  --color-danger-fg: #ff4da6;
+
+  /* 버튼 (secondary) */
+  --color-btn-text: #eeede7;
+  --color-btn-bg: #242321;
+  --color-btn-border: rgba(238, 237, 231, 0.16);
+  --color-btn-hover-bg: #373633;
+  --color-btn-hover-border: rgba(238, 237, 231, 0.26);
+  --color-btn-active-bg: #373633;
+  --color-btn-active-border: rgba(238, 237, 231, 0.26);
+
+  /* 버튼 (primary = 댓글 등록) */
+  --color-btn-primary-text: #1b1a18;
+  --color-btn-primary-bg: #ff4da6;
+  --color-btn-primary-hover-bg: #e6398c;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-hover-border: transparent;
+  --color-btn-primary-selected-bg: #e6398c;
+  --color-btn-primary-disabled-bg: rgba(255, 77, 166, 0.5);
+
+  /* 반응 hover */
+  --color-social-reaction-bg-hover: #373633;
+  --color-social-reaction-bg-reacted-hover: #373633;
+
+  color-scheme: dark;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+main .gsc-comment-box-textarea,
+main .markdown-body,
+main .gsc-comment-content {
+  font-family: inherit;
+}
+
+main .gsc-comment > div,
+main .gsc-comment-box {
+  border-radius: 12px;
+}
