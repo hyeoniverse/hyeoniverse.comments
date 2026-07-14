@@ -31,6 +31,7 @@ main {
 
   /* accent — 링크만 */
   --color-accent-fg: #d40063;
+  --color-accent-light: #ff4f9d;             /* 입력 포커스 등 옅은 accent */
   --color-accent-emphasis: #504f49;          /* 포커스/강조 = 중립 */
   --color-accent-muted: rgba(36, 35, 33, 0.3);
   --color-accent-subtle: rgba(36, 35, 33, 0.06);
@@ -91,12 +92,18 @@ main .gsc-timeline > .gsc-comment + .gsc-comment {
   border-top: 1px solid var(--color-border-muted);
 }
 
-/* 스레드(답글) — giscus 기본 inset 박스(bg/border/rounded-b-md)만 제거해 트이게.
-   연결선/들여쓰기는 giscus 자체(.gsc-tl-line + .gsc-reply 레이아웃)를 그대로 씀 → 가짜 선 이중 방지 */
+/* 스레드(답글) — giscus 기본 inset 박스 제거 + 스레드 전체를 감싸는 좌측 통짜 연결선 하나.
+   giscus 자체 짧은 연결선(.gsc-tl-line)은 숨겨 이중선 방지 */
 main .gsc-replies {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
+  border-left: 2px solid var(--color-border-muted) !important;
+  margin-left: 13px;
+  padding-left: 22px;
+}
+main .gsc-tl-line {
+  display: none !important;
 }
 
 /* 한 줄 컨트롤 = capsule */
@@ -125,40 +132,50 @@ main .BtnGroup-item + .BtnGroup-item {
 }
 
 /* 블록 = 2xl */
-main .gsc-comment-box,
 main .markdown-body pre,
 main .markdown-body img,
 main .gsc-reactions-popover {
   border-radius: 24px !important;
 }
-/* 입력 박스 — textarea 상단 2xl, footer(마크다운 버튼) 하단 2xl */
+
+/* 입력 박스 = 탭 + aa툴바 + textarea + footer 를 감싸는 2xl 컨테이너.
+   내부 요소는 각지게 두고 박스가 통째로 clip → "감싸는 곳"만 2xl */
 main .gsc-comment-box {
+  border-radius: 24px !important;
   overflow: hidden !important;
 }
 main .gsc-comment-box-textarea,
 main textarea.form-control {
-  border-radius: 24px 24px 0 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
 }
 main .gsc-comment-box-bottom {
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
+  border-radius: 0 !important;
+}
+/* 포커스 = 감싸는 박스 테두리가 light accent (내부 textarea 는 borderless) */
+main .gsc-comment-box:focus-within {
+  border-color: var(--color-accent-light) !important;
+  box-shadow: none !important;
 }
 
-/* Write / Preview 탭 = 하나의 pill 세그먼트 (실제 class .gsc-comment-box-tabs, BtnGroup 아님) */
+/* Write / Preview 탭 = pill 세그먼트 (.gsc-comment-box-tabs) — 박스 안쪽 여백 두고 배치 */
 main .gsc-comment-box-tabs {
-  display: inline-flex;
+  display: inline-flex !important;
   width: max-content;
+  margin: 12px 14px 2px !important;
+  padding: 0 !important;
   background: transparent !important;
   border: 1px solid var(--color-btn-border) !important;
   border-radius: 9999px !important;
   overflow: hidden;
-  padding: 0 !important;
 }
 main .gsc-comment-box-tabs button {
   margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
   padding: 5px 16px !important;
+  background: transparent !important;
 }
 main .gsc-comment-box-tabs button + button {
   border-left: 1px solid var(--color-btn-border) !important;
@@ -169,13 +186,26 @@ main .gsc-comment-box-tabs button.color-bg-canvas {
   color: var(--color-fg-default) !important;
 }
 
-/* 입력창 포커스 — 중립 보더 (accent 금지: accent 는 링크 전용), 얇게 */
-main .gsc-comment-box-textarea:focus,
-main textarea.form-control:focus,
-main textarea:focus {
-  border-color: var(--color-primer-border-active) !important;
-  box-shadow: none !important;
-  outline: none !important;
+/* aa 서식 툴바(.gsc-comment-box-md-toolbar) = 탭과 별개 sibling 행. 캡슐 버튼으로 정리 */
+main .gsc-comment-box-md-toolbar {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  margin: 0 14px 6px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+main .gsc-toolbar-item {
+  border-radius: 9999px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--color-fg-subtle) !important;
+}
+main .gsc-toolbar-item:hover {
+  background: var(--color-btn-hover-bg) !important;
+  color: var(--color-fg-default) !important;
 }
 
 /* 댓글 등록(primary) = 공통 .variant-primary: 채움 → hover 시 투명+본문색 반전 */
