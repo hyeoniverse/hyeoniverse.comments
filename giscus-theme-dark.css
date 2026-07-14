@@ -91,14 +91,12 @@ main .gsc-timeline > .gsc-comment + .gsc-comment {
   border-top: 1px solid var(--color-border-muted);
 }
 
-/* 스레드(답글) — giscus 기본 inset 박스(bg/border/rounded-b-md) 제거 → 트인 좌측 연결선 */
+/* 스레드(답글) — giscus 기본 inset 박스(bg/border/rounded-b-md)만 제거해 트이게.
+   연결선/들여쓰기는 giscus 자체(.gsc-tl-line + .gsc-reply 레이아웃)를 그대로 씀 → 가짜 선 이중 방지 */
 main .gsc-replies {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
-  border-left: 2px solid var(--color-border-muted) !important;
-  margin-left: 15px;
-  padding-left: 20px;
 }
 
 /* 한 줄 컨트롤 = capsule */
@@ -110,7 +108,7 @@ main .gsc-comment-author-association {
   border-radius: 9999px !important;
 }
 
-/* Write / Preview = 하나의 pill 세그먼트 */
+/* 정렬(.gsc-right-header.BtnGroup) = 하나의 pill 세그먼트 */
 main .BtnGroup {
   border-radius: 9999px !important;
   overflow: hidden;
@@ -146,6 +144,32 @@ main .gsc-comment-box-bottom {
   border-bottom-left-radius: 24px;
   border-bottom-right-radius: 24px;
 }
+
+/* Write / Preview 탭 = 하나의 pill 세그먼트 (실제 class .gsc-comment-box-tabs, BtnGroup 아님) */
+main .gsc-comment-box-tabs {
+  display: inline-flex;
+  width: max-content;
+  background: transparent !important;
+  border: 1px solid var(--color-btn-border) !important;
+  border-radius: 9999px !important;
+  overflow: hidden;
+  padding: 0 !important;
+}
+main .gsc-comment-box-tabs button {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 5px 16px !important;
+}
+main .gsc-comment-box-tabs button + button {
+  border-left: 1px solid var(--color-btn-border) !important;
+}
+/* 선택된 탭 = 옅은 채움 (giscus 가 active 탭에 color-bg-canvas 부여) */
+main .gsc-comment-box-tabs button.color-bg-canvas {
+  background: var(--color-btn-hover-bg) !important;
+  color: var(--color-fg-default) !important;
+}
+
 /* 입력창 포커스 — 옅은 accent, 얇게 (두꺼운 ring 제거) */
 main .gsc-comment-box-textarea:focus,
 main textarea.form-control:focus,
@@ -193,18 +217,16 @@ main .gsc-direct-reaction-buttons button {
   border-radius: 9999px !important;
 }
 
-/* 댓글 불러오는 중 — 상단 여백 */
-main .gsc-loading,
-main .gsc-timeline-loading {
+/* 댓글 불러오는 중 — 상단 여백 (실제 class: .gsc-pagination / .pagination-loader-container) */
+main .gsc-pagination,
+main .pagination-loader-container {
   margin-top: 48px;
 }
 
-/* 정렬(오래된순/새로운순) 선택된 버튼 — inverse 채움 (다크=흰배경+검정글자, primary 변수 자동) */
-main .gsc-header [aria-selected="true"],
-main .gsc-header .btn.selected,
-main .gsc-header .BtnGroup-item.selected,
-main .gsc-comments-header [aria-selected="true"],
-main .gsc-comments-tabs [aria-selected="true"] {
+/* 정렬(오래된순/새로운순) — .gsc-right-header.BtnGroup 안의 선택 항목 .BtnGroup-item--selected.
+   inverse 채움 (다크=흰배경+검정글자, primary 변수 자동) */
+main .gsc-right-header .BtnGroup-item--selected,
+main .gsc-right-header .BtnGroup-item--selected .btn {
   background: var(--color-btn-primary-bg) !important;
   color: var(--color-btn-primary-text) !important;
   border-color: transparent !important;
@@ -218,25 +240,3 @@ main .markdown-body :not(pre) > code {
 /* 표 — 좌우 트인 라인 테이블 */
 main .markdown-body table {
   display: table;
-  width: 100%;
-  border: 0;
-  border-collapse: collapse;
-}
-main .markdown-body table tr {
-  background: transparent !important;
-  border-top: 0;
-}
-main .markdown-body table th,
-main .markdown-body table td {
-  border: 0;
-  border-bottom: 1px solid var(--color-border-muted);
-  padding: 8px 14px;
-  text-align: left;
-}
-main .markdown-body table th {
-  border-bottom: 2px solid var(--color-border-default);
-  font-weight: 600;
-}
-main .markdown-body table tr:last-child td {
-  border-bottom: 0;
-}
