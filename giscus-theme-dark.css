@@ -48,14 +48,14 @@ main {
   --color-btn-active-bg: rgba(238, 237, 231, 0.10);
   --color-btn-active-border: rgba(238, 237, 231, 0.30);
 
-  /* 버튼 (primary = 댓글 등록) — inverse 채움 */
-  --color-btn-primary-text: #1b1a18;
-  --color-btn-primary-bg: #eeede7;
-  --color-btn-primary-hover-bg: #d8d6cd;
-  --color-btn-primary-border: transparent;
-  --color-btn-primary-hover-border: transparent;
-  --color-btn-primary-selected-bg: #d8d6cd;
-  --color-btn-primary-disabled-bg: rgba(238, 237, 231, 0.5);
+  /* 버튼 (primary = 댓글 등록) — 공통 컴포넌트 .variant-primary 그대로 (bg-inverse/text-inverse) */
+  --color-btn-primary-text: #000000;              /* --text-inverse (neutral-0) */
+  --color-btn-primary-bg: #f8f6f0;                /* --bg-inverse (neutral-950) */
+  --color-btn-primary-hover-bg: #f8f6f0;
+  --color-btn-primary-border: #f8f6f0;
+  --color-btn-primary-hover-border: #f8f6f0;
+  --color-btn-primary-selected-bg: #cac9c1;       /* --bg-inverse-light (neutral-700) = active */
+  --color-btn-primary-disabled-bg: rgba(248, 246, 240, 0.5);
 
   /* 반응 — 중립 */
   --color-social-reaction-bg-hover: rgba(238, 237, 231, 0.07);
@@ -170,21 +170,32 @@ main .gsc-comment-box-tabs button.color-bg-canvas {
   color: var(--color-fg-default) !important;
 }
 
-/* 입력창 포커스 — 옅은 accent, 얇게 (두꺼운 ring 제거) */
+/* 입력창 포커스 — 중립 보더 (accent 금지: accent 는 링크 전용), 얇게 */
 main .gsc-comment-box-textarea:focus,
 main textarea.form-control:focus,
 main textarea:focus {
-  border-color: rgba(255, 77, 166, 0.45) !important;
+  border-color: var(--color-primer-border-active) !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
-/* 댓글 등록(primary) disabled — dimmed inverse + 대비 있는 글자 */
+/* 댓글 등록(primary) = 공통 .variant-primary: 채움 → hover 시 투명+본문색 반전 */
+main .btn-primary:hover:not(:disabled) {
+  background: transparent !important;
+  color: var(--color-fg-default) !important;
+  border-color: var(--color-btn-primary-bg) !important;
+}
+main .btn-primary:active:not(:disabled) {
+  background: var(--color-btn-primary-selected-bg) !important;
+  color: var(--color-btn-primary-text) !important;
+  border-color: var(--color-btn-primary-selected-bg) !important;
+}
+/* disabled — dimmed inverse (익명 사용자 상태) */
 main .btn-primary:disabled,
 main .btn-primary[disabled],
 main .btn-primary.disabled {
-  background: rgba(238, 237, 231, 0.42) !important;
-  color: rgba(27, 26, 24, 0.85) !important;
+  background: rgba(248, 246, 240, 0.42) !important;
+  color: rgba(0, 0, 0, 0.85) !important;
   border-color: transparent !important;
   opacity: 1 !important;
 }
