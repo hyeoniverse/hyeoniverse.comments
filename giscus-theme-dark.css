@@ -91,11 +91,14 @@ main .gsc-timeline > .gsc-comment + .gsc-comment {
   border-top: 1px solid var(--color-border-muted);
 }
 
-/* 스레드(답글) — 좌측 연결선 + 인덴트 */
+/* 스레드(답글) — giscus 기본 inset 박스(bg/border/rounded-b-md) 제거 → 트인 좌측 연결선 */
 main .gsc-replies {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-left: 2px solid var(--color-border-muted) !important;
   margin-left: 15px;
   padding-left: 20px;
-  border-left: 2px solid var(--color-border-muted);
 }
 
 /* 한 줄 컨트롤 = capsule */
@@ -167,17 +170,19 @@ main .gsc-timeline {
   border-top: 1px solid var(--color-border-muted);
   border-bottom: 1px solid var(--color-border-muted);
 }
-/* 답글 작성 영역도 동일 open — radius 없이 위아래 border */
+/* 답글 작성 영역(.gsc-comment-box-is-reply) — open: bg/radius 없이 아래에만 border */
+main .gsc-comment-box-is-reply,
 main .gsc-replies .gsc-comment-box {
-  border-radius: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-top: 1px solid var(--color-border-muted) !important;
+  background: transparent !important;
+  border: 0 !important;
   border-bottom: 1px solid var(--color-border-muted) !important;
+  border-radius: 0 !important;
   overflow: visible !important;
 }
+main .gsc-comment-box-is-reply .gsc-comment-box-textarea,
+main .gsc-comment-box-is-reply .gsc-comment-box-bottom,
 main .gsc-replies .gsc-comment-box-textarea,
-main .gsc-replies textarea.form-control {
+main .gsc-replies .gsc-comment-box-bottom {
   border-radius: 0 !important;
 }
 
