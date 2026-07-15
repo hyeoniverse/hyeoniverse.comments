@@ -118,16 +118,31 @@ main .gsc-comment-author-association {
   border-radius: 9999px !important;
 }
 
-/* 정렬(.gsc-right-header.BtnGroup) = 하나의 pill 세그먼트 (그룹만 pill, 안쪽 버튼은 각지게 이어붙음) */
+/* 정렬(.gsc-right-header.BtnGroup) = 하나의 pill 세그먼트 (그룹만 pill, 안쪽 버튼은 각지게 이어붙음).
+   inline-flex + stretch 로 버튼이 pill 안쪽을 꽉 채워야 hover 배경에 유격이 안 생김
+   (Primer 기본 .BtnGroup-item 의 float/음수마진이 유격의 원인) */
 main .BtnGroup {
+  display: inline-flex;
+  align-items: stretch;
   border-radius: 9999px !important;
   overflow: hidden;
   border: 1px solid var(--color-btn-border);
+}
+main .BtnGroup-item {
+  display: flex !important;
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 main .BtnGroup .btn,
 main .BtnGroup-item {
   border-radius: 0 !important;
   border: 0 !important;
+}
+main .BtnGroup .btn {
+  display: flex !important;
+  align-items: center;
+  margin: 0 !important;
 }
 main .BtnGroup .btn + .btn,
 main .BtnGroup-item + .BtnGroup-item {
@@ -156,9 +171,8 @@ main textarea.form-control {
 main .gsc-comment-box-bottom {
   border-radius: 0 !important;
   border-top: 1px solid var(--color-border-muted) !important;   /* footer 구분선 */
-  padding-top: 12px !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  padding: 12px 14px !important;      /* 좌우 14 = textarea/preview 와 동일 정렬 */
+  margin: 0 !important;               /* 좌우·아래 마진 제거 → 구분선이 박스 폭 전체 */
 }
 /* textarea 아래 extras(마크다운 링크 영역) — 배경/보더/radius 제거 */
 main .gsc-comment-box-textarea-extras {
@@ -316,17 +330,26 @@ main .gsc-replies .gsc-comment-box {
   overflow: visible !important;
   margin-top: 16px !important;          /* 위 답글과의 여백 */
 }
-main .gsc-comment-box-is-reply .gsc-comment-box-textarea,
+/* 답글쪽 footer 만 각지게. textarea 는 제외 — 메인/답글 모두 2xl 유지 (여기 넣으면 특정도가 높아 2xl 을 덮어버림) */
 main .gsc-comment-box-is-reply .gsc-comment-box-bottom,
-main .gsc-replies .gsc-comment-box-textarea,
 main .gsc-replies .gsc-comment-box-bottom {
   border-radius: 0 !important;
 }
-/* 답글 박스 래퍼(.gsc-reply-box, color-bg-tertiary) — 배경 제거 + 왼쪽 indent.
-   8px = .gsc-reply 의 스레드 줄과 같은 x축 (안쪽 박스의 줄이 여기서 시작하도록) */
+/* 답글 박스 래퍼(.gsc-reply-box, color-bg-tertiary) — 배경/위 border 제거 + 왼쪽 indent */
 main .gsc-reply-box {
   background: transparent !important;
+  border-top: 0 !important;
   padding-left: 8px !important;
+}
+/* 답글 작성 접힌 placeholder(.form-control.cursor-text) — capsule + 내용 너비만(w-full 해제).
+   클릭해 작성 모드로 펼쳐지면 이 요소는 사라지고 실제 .gsc-comment-box 가 100% 폭으로 뜸 */
+main .form-control.cursor-text {
+  width: auto !important;
+  border-radius: 9999px !important;
+}
+/* 작성 모드 = 실제 입력 박스는 100% 폭 */
+main .gsc-comment-box {
+  width: 100% !important;
 }
 /* 답글 내부 박스(color-box-border-info) — info 박스 제거. 왼쪽 스레드 줄만 남기고 위/아래/오른쪽 border 없음 */
 main .color-box-border-info.w-full.rounded-md {
